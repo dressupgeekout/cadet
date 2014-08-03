@@ -1,0 +1,58 @@
+== CADET TUTORIAL ==
+
+Christian Koch <cfkoch@sdf.lonestar.org>
+
+Last updated: July 31, 2014
+
+---------- ---------- ----------
+
+=== INTRODUCTION ===
+
+Cadet is a minimal interface between Lua and bozohttpd. With Cadet, it
+should be possible to comfortably develop a web application and actually
+deploy it from a base NetBSD installation.
+
+Cadet is sort of like WSGI for Python or Rack for Ruby. It is not a
+full-featured framework for rapid web application development (try Django or
+Rails or somethign else instead). In order to use Cadet effectively, you
+should know (or be willing to learn) thing or two about HTTP/1.1.
+
+---------- ---------- ----------
+
+=== HELLO, CADET ===
+
+    -- hello.lua
+    Hello = {}
+
+    function Hello.index(env, x, x)
+      Cadet.response.body = "<h1>Lift off!</h1>"
+      Cadet.finish()
+    end
+
+    httpd.register("hello", Hello.index)
+
+    # /etc/inetd.conf
+    9292 w x y z a b c
+
+---------- ---------- ----------
+
+=== STATIC FILES ===
+
+bozohttpd is already very good at serving static files. Cadet doesn't handle
+that -- instead you "configure" bozohttp to handle static files from a
+particular directory. 
+
+So if your application has a structure like this:
+
+    app/
+      blog.lua
+
+    public/
+      css/
+        style.css
+      js/
+        jquery.css
+
+Then you invoke bozohttpd like this:
+
+    http a b c d e f g /path/to/blog/public

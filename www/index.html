@@ -1,0 +1,153 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="iso8859-1"/>
+  <title>Cadet - The bozohttpd/Lua Interface</title>
+  <style type="text/css">
+    body {
+      width: 50em;
+      margin: auto;
+      font-family: "Helvetica", sans-serif;
+      text-align: justify;
+    }
+
+    header hgroup h1, header hgroup h2 {
+      margin: 0em;
+      padding: 0em;
+    }
+
+    header hgroup h3 {
+      font-weight: normal;
+    }
+
+    header {
+      padding: 1em 0em 0em 0em;
+    }
+
+    section header h1 {
+      background-color: #ddd;
+      padding: 0.25em;
+      margin: 0em;
+    }
+
+    footer {
+      padding: 3em 0em 1em 0em;
+      font-size: small;
+    }
+
+    #logo {
+      float: left;
+      padding: 0em 1em 0em 0em;
+    }
+
+    pre {
+      background-color: #ddd;
+      margin: 1em 2em 1em 2em;
+      padding: 0.15em 1em 0.15em 1em;
+    }
+
+    a {
+      font-weight: normal;
+      color: #009;
+    }
+
+    a:hover {
+      color: #00d;
+    }
+
+    section {
+      padding: 0em 0em 1.5em 0em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div id="logo">
+    <img alt="" src="./img/spaceship.png"/>
+  </div>
+
+  <hgroup>
+    <h1>Cadet</h1>
+    <h2>The bozohttpd/Lua Interface</h2>
+    <h3>
+      <a href="https://encrypted.google.com/search?tbm=isch&q=duck%20dodgers&tbs=imgo:1#q=duck+dodgers&tbm=isch&tbs=imgo:1">
+        (a.k.a. the web framework for the 24&frac12;th century)
+      </a>
+    </h3>
+  </hgroup>
+
+  <div style="clear:both;"></div>
+  <hr/>
+</header>
+
+<!-- -->
+
+<section>
+  <p><strong>Cadet is a minimal interface between bozohttpd and
+  Lua.</strong></p>
+
+  <p>The intention and original inspiration is to allow one to comfortably
+  develop dynamic web applications straight from a basic NetBSD installation.
+  pkgsrc nor LuaRocks are required.</p>
+</section>
+
+<!-- -->
+
+<section>
+  <header><h1>Greetings, Cadet</h1></header>
+
+  <p>Let's whet your appetite:</p>
+
+  <pre><code>
+-- hello.lua
+
+Hello = {}
+
+function Hello.index(env, request, query)
+  return Cadet.finish()
+end
+
+httpd.register_handler("index", Hello.index)
+  </code></pre>
+
+  <pre><code>
+# /etc/inetd.conf
+http a c d e g sdf ds 
+  </code></pre>
+</section>
+
+<!-- -->
+
+<section>
+  <header><h1>Source Code</h1></header>
+
+  <p>Cadet's source code is maintained in a <a href="#">Git repository hosted
+  at GitHub</a>.</p>
+</section>
+
+<!-- -->
+
+<section>
+  <header><h1>Useful Links</h1></header>
+
+  <ul>
+    <li><a href="http://www.eterna.com.au/bozohttpd/">Discover bozohttpd</a></li>
+    <li><a href="http://www.lua.org">Discover Lua</a></li>
+    <!--<li><a href="">NetBSD's Lua/sqlite bindings</a></li>
+    -->
+  </ul>
+</section>
+
+<!-- -->
+
+<footer>
+  <hr/>
+  <p>&copy;2014 Christian Koch. The
+  <a href="http://openclipart.org/detail/195036/rocket-by-j4p4n-195036">spaceship image</a>
+  is in the public domain.</p>
+</footer>
+
+</body>
+</html>

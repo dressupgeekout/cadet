@@ -1,0 +1,24 @@
+== CADET ==
+
+Cadet is a minimal interface between bozohttpd and Lua. It's kind of like
+WSGI for Python, or Rack for Ruby, except Cadet is designed *only* for
+bozohttpd.
+
+
+=== CADET'S GOALS ===
+
+With Cadet, you should be able to comfortably develop dynamic web
+applications and actually deploy them from a base NetBSD installation.
+LuaRocks nor even pkgsrc are required.
+
+
+=== REQUIREMENTS ===
+
+You need a fairly recent version of bozohttpd -- one with Lua support,
+naturally. The bozohttpd which ships with NetBSD 6 is not new enough.
+
+
+=== LICENSE ===
+
+Cadet is released under a 2-clause BSD-style license. See the LICENSE file
+for details.
