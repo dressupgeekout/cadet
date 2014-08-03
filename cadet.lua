@@ -151,3 +151,11 @@ function Cadet.render(template, view)
 
   return out
 end
+
+
+--[[
+  Appends the given string to the Cadet.response's body.
+]]
+function Cadet.write(string)
+  Cadet.response.body = (Cadet.response.body .. string)
+end
