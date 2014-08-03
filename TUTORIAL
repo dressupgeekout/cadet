@@ -12,47 +12,68 @@ Cadet is a minimal interface between Lua and bozohttpd. With Cadet, it
 should be possible to comfortably develop a web application and actually
 deploy it from a base NetBSD installation.
 
-Cadet is sort of like WSGI for Python or Rack for Ruby. It is not a
+Cadet is sort of like WSGI for Python, or Rack for Ruby. It is not a
 full-featured framework for rapid web application development (try Django or
-Rails or somethign else instead). In order to use Cadet effectively, you
-should know (or be willing to learn) thing or two about HTTP/1.1.
+Rails or something else instead). In order to use Cadet effectively, you
+should know (or be willing to learn) a thing or two about HTTP/1.1.
 
 ---------- ---------- ----------
 
 === HELLO, CADET ===
 
+A Cadet application requires (1) an application controller, which is a Lua
+script, and (2) an entry inside inetd.conf(5). 
+
+The Lua script must contain at least one call to httpd.register(). The
+inetd.conf entry must specify bozohttpd with at least one -L option.
+
+Here is a basic Lua script:
+
     -- hello.lua
     Hello = {}
 
-    function Hello.index(env, x, x)
+    function Hello.index(env, headers, query)
       Cadet.response.body = "<h1>Lift off!</h1>"
-      Cadet.finish()
+      return Cadet.finish()
     end
 
-    httpd.register("hello", Hello.index)
+    httpd.register("index", Hello.index)
+
+And here is the corresponding inetd.conf entry:
 
     # /etc/inetd.conf
-    9292 w x y z a b c
+    9292 stream tcp nowait:600 _httpd /path/to/bozohttpd \
+    httpd -L hello /path/to/hello.lua \
+    /path/to/slashdir
+
+Restart inetd(8) and then point your browser to this URI:
+
+    http://127.0.0.1:9292/hello/index
+
+You should see "Lift off!" in huge letters.
 
 ---------- ---------- ----------
 
 === STATIC FILES ===
 
 bozohttpd is already very good at serving static files. Cadet doesn't handle
-that -- instead you "configure" bozohttp to handle static files from a
-particular directory. 
+that -- instead you "configure" bozohttpd to handle static files from a
+particular directory.
 
 So if your application has a structure like this:
 
-    app/
-      blog.lua
-
-    public/
-      css/
-        style.css
-      js/
-        jquery.css
+    blog/
+      app/
+        blog.lua
+      public/
+        css/
+          style.css
+        js/
+          jquery.css
 
 Then you invoke bozohttpd like this:
 
-    http a b c d e f g /path/to/blog/public
+    # inetd.conf
+    8080 stream tcp nowait:600 _http /path/to/bozohttpd \
+    httpd -L blog /path/to/blog/app/blog.lua \
+    /path/to/blog/public
