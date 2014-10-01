@@ -18,7 +18,7 @@ function Greetings.index(env, headers, query)
   local res = Cadet.response
   local write = Cadet.write
 
-  res.content_type = "text/html"
+  res.headers["Content-Type"] = "text/html"
   res.status = 200
 
   write("<h1>Greetings, Cadet</h1>")
