@@ -9,7 +9,8 @@
     /path/to/slashdir
 ]]
 
-dofile("/home/christian/devel/cadet/cadet.lua")
+package.path = "/home/christian/devel/cadet/?.lua;" .. package.path
+local Cadet = require("cadet")
 
 Greetings = {}
 

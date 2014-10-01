@@ -31,7 +31,7 @@
 ]]
 
 -- The main namespace.
-Cadet = {}
+local Cadet = {}
 
 Cadet._VERSION = "0.0.0a"
 
@@ -159,3 +159,5 @@ end
 function Cadet.write(string)
   Cadet.response.body = (Cadet.response.body .. string)
 end
+
+return Cadet
