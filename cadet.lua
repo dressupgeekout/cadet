@@ -145,13 +145,13 @@ end
   Cadet.response.body to the output of this function.
 ]]
 function Cadet.render(template, view)
-  out = template
+  local t = {}
 
-  for k,v in pairs(view) do
-    pattern = string.format("{{%s}}", k)
-    out = string.gsub(out, pattern, v)
+  for k, v in pairs(view) do
+    t[k] = tostring(v)
   end
 
+  out, _ = string.gsub(template, "{{(%w+)}}", t)
   return out
 end
 
