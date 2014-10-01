@@ -38,8 +38,8 @@ Cadet._VERSION = "0.0.0a"
 -- The default HTTP response.
 Cadet.response = {
   http_version = "1.1",
-  content_type = "text/html",
   status = 200,
+  headers = { ["Content-Type"] = "text/html", },
   body = "",
 }
 
@@ -111,7 +111,10 @@ function Cadet.finish()
     Cadet.status_map[res.status]
   ))
 
-  printcrlf(format("Content-Type: %s", res.content_type))
+  for name, value in pairs(res.headers) do
+    printcrlf(format("%s: %s", name, value))
+  end
+
   printcrlf(format("Content-Length: %d", string.len(res.body)))
   printcrlf("")
   io.write(res.body)
