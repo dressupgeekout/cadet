@@ -156,6 +156,22 @@ end
 
 
 --[[
+  Much like Cadet.render() except the template string is created by reading
+  the file at the given path. If something goes wrong reading the
+  template_file then we return false (see Cadet.readfile()).
+]]
+function Cadet.render_file(template_path, view)
+  local template = Cadet.readfile(template_path)
+
+  if template then
+    return Cadet.render(template, view)
+  else
+    return false
+  end
+end
+
+
+--[[
   Appends the given string to the Cadet.response's body.
 ]]
 function Cadet.write(string)
