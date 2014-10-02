@@ -87,7 +87,7 @@ Cadet.status_map = {
 }
 
 -- Writes the given string to the standard output, but with CRLF appended.
-function Cadet.printcrlf(str)
+function printcrlf(str)
   io.write(string.format("%s\r\n", str))
 end
 
@@ -100,7 +100,6 @@ Cadet.before = function() end
 
 -- Writes the entire HTTP response to the standard output.
 function Cadet.finish()
-  local printcrlf = Cadet.printcrlf
   local res = Cadet.response 
   local format = string.format
 
