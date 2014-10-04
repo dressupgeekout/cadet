@@ -3,6 +3,16 @@ local Cadet = require("cadet")
 
 Params = {}
 
+function printtable(tayble)
+  s = ""
+
+  for k,v in pairs(tayble) do
+    s = s .. string.format("%s = %s\n", k, v)
+  end
+
+  return s
+end
+
 function Params.index(env, headers, query)
   local res = Cadet.response
 
@@ -10,17 +20,29 @@ function Params.index(env, headers, query)
   res.status = 200
 
   view = {
-    ["env"] = env,
-    ["headers"] = headers,
-    ["query"] = query,
+    ["env"] = printtable(env),
+    ["headers"] = printtable(headers),
+    ["query"] = printtable(query),
   }
 
   body = [[
 This is an example!
 
-env: {{env}}
-headers: {{headers}}
-query: {{query}}
+env:
+
+{{env}}
+
+-----
+
+headers:
+
+{{headers}}
+
+-----
+
+query:
+
+{{query}}
 
 Awesome!
   ]]
