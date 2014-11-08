@@ -49,8 +49,8 @@ Cadet.status_map = {
   [200] = "OK",
   [201] = "Created",
   [202] = "Accepted",
-  [203] = "Non-Authoritative Information" ,
-  [204] = "No Content" ,
+  [203] = "Non-Authoritative Information",
+  [204] = "No Content",
   [205] = "Reset Content",
   [206] = "Partial Content",
   [300] = "Multiple Choices",
@@ -82,8 +82,8 @@ Cadet.status_map = {
   [501] = "Not Implemented",
   [502] = "Bad Gateway",
   [503] = "Service Unavailable",
-  [504] = "Gateway Timeout" ,
-  [505] = "HTTP Version Not Supported" ,
+  [504] = "Gateway Timeout",
+  [505] = "HTTP Version Not Supported",
 }
 
 -- Writes the given string to the standard output, but with CRLF appended.
