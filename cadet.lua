@@ -30,10 +30,13 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ]]
 
+-- httpd interface
+local httpd = require "httpd"
+
 -- The main namespace.
 local Cadet = {}
 
-Cadet._VERSION = "0.0.0a"
+Cadet._VERSION = "0.0.0b"
 
 -- The default HTTP response.
 Cadet.response = {
@@ -88,7 +91,7 @@ Cadet.status_map = {
 
 -- Writes the given string to the standard output, but with CRLF appended.
 function printcrlf(str)
-  io.write(string.format("%s\r\n", str))
+  httpd.write(string.format("%s\r\n", str))
 end
 
 --[[
@@ -116,7 +119,7 @@ function Cadet.finish()
 
   printcrlf(format("Content-Length: %d", string.len(res.body)))
   printcrlf("")
-  io.write(res.body)
+  httpd.write(res.body)
 end
 
 
