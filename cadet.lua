@@ -99,14 +99,14 @@ end
   thing when calling Cadet.finish(). By default it does nothing. You are
   free to re-implement it.
 ]]
-Cadet.before = function() end
+Cadet.before = function(Cadet) end
 
 -- Writes the entire HTTP response to the standard output.
 function Cadet.finish()
   local res = Cadet.response 
   local format = string.format
 
-  Cadet.before()
+  Cadet.before(Cadet)
 
   printcrlf(format(
     "HTTP/%s %d %s", res.http_version, res.status,
@@ -173,6 +173,13 @@ function Cadet.render_file(template_path, view)
   end
 end
 
+--[[
+  Calls Cadent.render_file then Cadet.write() with the result
+  see Cadet.render_file()).
+]]
+function Cadet.render_file_write(template_path, view)
+  Cadet.write(Cadet.render_file(template_path, view))
+end
 
 --[[
   Appends the given string to the Cadet.response's body.
