@@ -1,6 +1,6 @@
 --[[
   greetings.lua - Cadet example
-  Christian Koch <cfkoch@sdf.lonestar.org>
+  Charlotte Koch <charlotteNetBSD.org>
 
   # /etc/inetd.conf:
 
@@ -9,7 +9,7 @@
     /path/to/slashdir
 ]]
 
-package.path = "/home/christian/devel/cadet/?.lua;" .. package.path
+package.path = "/home/charlotte/devel/cadet/?.lua;" .. package.path
 local Cadet = require("cadet")
 
 Greetings = {}

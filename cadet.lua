@@ -3,7 +3,7 @@
 
   -----
 
-  Copyright (c) 2014, 2015, 2016, 2017 Charlotte Koch <cfkoch@edgebsd.org>
+  Copyright (c) 2014, 2015, 2016, 2017 Charlotte Koch <charlotte@NetBSD.org>
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without

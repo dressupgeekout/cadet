@@ -1,4 +1,4 @@
-package.path = "/home/christian/devel/cadet/?.lua;" .. package.path
+package.path = "/home/charlotte/devel/cadet/?.lua;" .. package.path
 local Cadet = require("cadet")
 
 Params = {}
