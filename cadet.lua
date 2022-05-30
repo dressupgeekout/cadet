@@ -30,8 +30,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ]]
 
--- httpd interface
-local httpd = require "httpd"
+local httpd = require("httpd")
 
 -- The main namespace.
 local Cadet = {}
@@ -120,6 +119,7 @@ function Cadet.finish()
   printcrlf(format("Content-Length: %d", string.len(res.body)))
   printcrlf("")
   httpd.write(res.body)
+  httpd.flush()
 end
 
 
