@@ -2,15 +2,15 @@
 
 Charlotte Koch <charlotte@NetBSD.org>
 
-Last updated: May 18, 2022
+Last updated: September 11, 2022
 
 ---------- ---------- ----------
 
 === INTRODUCTION ===
 
 Cadet is a minimal interface between Lua and bozohttpd. With Cadet, it
-should be possible to comfortably develop a web application and actually
-deploy it from a base NetBSD installation.
+should be possible to comfortably develop a simple web application and
+actually deploy it from a base NetBSD installation.
 
 Cadet is sort of like WSGI for Python, or Rack for Ruby. It is not a
 full-featured framework for rapid web application development (try Django or
@@ -27,9 +27,8 @@ script, and (2) an entry inside inetd.conf(5).
 The Lua script must contain at least one call to httpd.register(). The
 inetd.conf entry must specify bozohttpd with at least one -L option.
 
-Here is a basic Lua script:
+Here is a basic Lua script, hello.lua:
 
-    -- hello.lua
     Hello = {}
 
     function Hello.index(env, headers, query)
@@ -41,10 +40,9 @@ Here is a basic Lua script:
 
 And here is the corresponding inetd.conf entry:
 
-    # /etc/inetd.conf
     9292 stream tcp nowait:600 _httpd /path/to/bozohttpd \
-    httpd -L hello /path/to/hello.lua \
-    /path/to/slashdir
+      httpd -L hello /path/to/hello.lua \
+      /path/to/slashdir
 
 Restart inetd(8) and then point your browser to this URI:
 
@@ -71,9 +69,8 @@ So if your application has a structure like this:
         js/
           jquery.css
 
-Then you invoke bozohttpd like this:
+Then you invoke bozohttpd like this, in inted.conf:
 
-    # inetd.conf
-    8080 stream tcp nowait:600 _http /path/to/bozohttpd \
-    httpd -L blog /path/to/blog/app/blog.lua \
-    /path/to/blog/public
+    8080 stream tcp nowait:600 _httpd /path/to/bozohttpd \
+      httpd -L blog /path/to/blog/app/blog.lua \
+      /path/to/blog/public

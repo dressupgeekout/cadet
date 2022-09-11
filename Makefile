@@ -3,7 +3,7 @@ help:
 	@echo Available targets:
 	@echo - install PREFIX=... DESTDIR=...
 
-LUA_MODULES_DIR:=	share/lua
+LUA_MODULES_DIR?=	share/lua
 
 .PHONY: install
 install: cadet.lua

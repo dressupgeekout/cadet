@@ -1,22 +1,22 @@
 == CADET FREQUENTLY ASKED QUESTIONS ==
 
-Q. What's so special about bozohttpd?
+[Q] What's so special about bozohttpd?
 
-A. Nothing. That's the point.
+[A] Nothing, really. That's the point.
 
 -----
 
-Q. What does "Cadet" mean?
+[Q] What does "Cadet" mean?
 
-A. You could probably find a space cadet on the moon. A space cadet is also
+[A] You could probably find a space cadet on the moon. A space cadet is also
 a bit of a bozo.
 
 -----
 
-Q. Aren't there already Lua web interface things? Ever heard of the Kepler
+[Q] Aren't there already Lua web interface things? Ever heard of the Kepler
 project?
 
-A. Yes, I've seen them, but none of them were built with bozohttpd in mind.
+[A] Yes, I've seen them, but none of them were built with bozohttpd in mind.
 Cadet's code base can be kept remarkably small because it bozohttpd depends
 on inetd(8) -- specifically, we read and write HTTP messages from the
 standard input and output. Those are the only file descriptors that really

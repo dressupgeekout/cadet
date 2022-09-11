@@ -3,7 +3,7 @@
 
   -----
 
-  Copyright (c) 2014, 2015, 2016, 2017 Charlotte Koch <charlotte@NetBSD.org>
+  Copyright (c) 2014-2022 Charlotte Koch <charlotte@NetBSD.org>
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -32,12 +32,12 @@
 
 local httpd = require("httpd")
 
--- The main namespace.
+--[[The main namespace.]]
 local Cadet = {}
 
 Cadet._VERSION = "0.0.0b"
 
--- The default HTTP response.
+--[[The default HTTP response.]]
 Cadet.response = {
   http_version = "1.1",
   status = 200,
@@ -88,19 +88,18 @@ Cadet.status_map = {
   [505] = "HTTP Version Not Supported",
 }
 
--- Writes the given string to the standard output, but with CRLF appended.
+--[[Writes the given string to the standard output, but with CRLF
+appended.]]
 function printcrlf(str)
   httpd.write(string.format("%s\r\n", str))
 end
 
---[[
-  Cadet.before() is a function that is unconditionally executed as the first
-  thing when calling Cadet.finish(). By default it does nothing. You are
-  free to re-implement it.
-]]
+--[[Cadet.before() is a function that is unconditionally executed as the
+first thing when calling Cadet.finish(). By default it does nothing. You are
+free to re-implement it.]]
 Cadet.before = function(Cadet) end
 
--- Writes the entire HTTP response to the standard output.
+--[[Writes the entire HTTP response to the standard output.]]
 function Cadet.finish()
   local res = Cadet.response 
   local format = string.format
@@ -123,10 +122,8 @@ function Cadet.finish()
 end
 
 
---[[
-  Reads the file at the given path and returns its contents. If the file at
-  "path" can't be read for whatever reason, then return false.
-]]
+--[[Reads the file at the given path and returns its contents. If the file
+at "path" can't be read for whatever reason, then return false.]]
 function Cadet.readfile(path)
   f = io.open(path, "r")
   out = ""
@@ -141,11 +138,9 @@ function Cadet.readfile(path)
 end
 
 
---[[
-  A simple, logic-less templating engine. "view" is a table. Returns the
-  rendered output as a string. To make any use of it, set
-  Cadet.response.body to the output of this function.
-]]
+--[[A simple, logic-less templating engine. "view" is a table. Returns the
+rendered output as a string. To make any use of it, set Cadet.response.body
+to the output of this function.]]
 function Cadet.render(template, view)
   local t = {}
 
@@ -158,11 +153,9 @@ function Cadet.render(template, view)
 end
 
 
---[[
-  Much like Cadet.render() except the template string is created by reading
-  the file at the given path. If something goes wrong reading the
-  template_file then we return false (see Cadet.readfile()).
-]]
+--[[Much like Cadet.render() except the template string is created by
+reading the file at the given path. If something goes wrong reading the
+template_file then we return false (see Cadet.readfile()).]]
 function Cadet.render_file(template_path, view)
   local template = Cadet.readfile(template_path)
 
@@ -173,17 +166,13 @@ function Cadet.render_file(template_path, view)
   end
 end
 
---[[
-  Calls Cadent.render_file then Cadet.write() with the result
-  see Cadet.render_file()).
-]]
+--[[Calls Cadent.render_file then Cadet.write() with the result see
+Cadet.render_file()).]]
 function Cadet.render_file_write(template_path, view)
   Cadet.write(Cadet.render_file(template_path, view))
 end
 
---[[
-  Appends the given string to the Cadet.response's body.
-]]
+--[[Appends the given string to the Cadet.response's body.]]
 function Cadet.write(string)
   Cadet.response.body = (Cadet.response.body .. string)
 end
